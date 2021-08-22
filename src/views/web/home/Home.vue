@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import topNavBar from "components/common/topNavBar/TopNavBar";
+import topNavBar from "components/business/topNavBar/TopNavBar";
 export default {
   components: { topNavBar },
   name: "Home",
@@ -13,7 +13,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #home {
-  height: 100vh;
+  height: 200vh;
   background-image: url("~assets/img/banner/untitled.png");
 }
 </style>

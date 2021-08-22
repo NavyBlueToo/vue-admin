@@ -1,5 +1,5 @@
 <template>
-  <div class="topNavBar clear-fix" @mouseenter="navBarClick" @mouseleave="navBarClick" :class="{navBarShowActive:!navBarActive}">
+  <div class="topNavBar clear-fix" @mouseenter="navBarClick" @mouseleave="navBarLeave" :class="{navBarShowActive:!navBarActive}">
     <div class="nav-logo">
       <img src="~/assets/img/compBaseImg/logo.png" v-if="navBarActive" />
       <img src="~/assets/img/compBaseImg/logo-active.png" v-else />
@@ -7,7 +7,7 @@
     <div class="nav-contents clear-fix">
       <div class="nav-content clear-fix" v-for="(item,index) in navBarContent" :key="index" @mouseenter="contentClick(index)" @mouseleave="contentLeave">
         <a href="">{{item.title}}</a>
-        <div class="child-nav clear-fix" v-if="item.childs.length > 0" :key="index" :style="{display:(index===childId ? 'inline' : 'none' )}">
+        <div class="child-nav clear-fix" v-if="item.childs.length > 0" :key="index" :style="{display:index===childId?'block':'none'}">
           <ul class="cont-childs  clear-fix">
             <li class="cont-child" v-for="child in item.childs" :key="child.id"><a href="">{{child}}</a></li>
           </ul>
@@ -29,6 +29,7 @@ export default {
       navContentShowActive: true,
       contentShow: false,
       childId: 0,
+      topDistance: 0,
       navBarContent: [
         { title: "首页", childs: [] },
         {
@@ -55,9 +56,17 @@ export default {
       ],
     };
   },
+  mounted: function () {
+    window.addEventListener("scroll", this.handleScroll, true); // 监听（绑定）滚轮滚动事件
+  },
   methods: {
     navBarClick() {
-      this.navBarActive = !this.navBarActive;
+      this.navBarActive = false;
+    },
+    navBarLeave() {
+      if (this.topDistance <= 0) {
+        this.navBarActive = true;
+      }
     },
     contentClick(index) {
       this.childId = index;
@@ -65,6 +74,15 @@ export default {
     },
     contentLeave() {
       this.childId = 0;
+    },
+    handleScroll() {
+      this.topDistance =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      if (this.topDistance > 70) {
+        this.navBarActive = false;
+      } else if (this.topDistance <= 0) {
+        this.navBarActive = true;
+      }
     },
   },
 };
@@ -76,6 +94,7 @@ export default {
   left: 0;
   right: 0;
   height: 70px;
+  width: 100%;
   color: #fff;
   font-size: 20px;
   transition: all 0.5s;
@@ -92,7 +111,7 @@ export default {
 }
 .nav-logo,
 .nav-contact {
-  width: 22%;
+  width: 25%;
 }
 .nav-logo img {
   width: 220px;
@@ -111,7 +130,6 @@ export default {
 .nav-content > a {
   display: inline-block;
   padding: 0 15%;
-  color: #fff;
 }
 .nav-content::before,
 .cont-child::before {
@@ -125,49 +143,81 @@ export default {
   transform: translate(-50%);
   transition: all 0.36s;
 }
-.nav-content:hover::before {
-  width: 72%;
+.nav-content:hover::before,
+.cont-child:hover::before {
+  width: 60%;
 }
 .navBarShowActive {
   color: #666;
   background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   .nav-content a {
     color: #666;
   }
-  .nav-content a:hover {
+  .nav-content:hover > a,
+  .cont-child:hover > a {
     color: #001eb4;
   }
 }
 .child-nav {
-  display: none;
-}
-.cont-childs {
   position: fixed;
-  display: flex;
+  display: none;
   float: left;
-  top: 70px;
   left: 0;
   right: 0;
-  align-items: center;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #fff;
+  animation: childsActive 0.5s;
+  border-top: 1px solid #dadcda;
+}
+// .child-nav-active {
+//   position: fixed;
+//   display: none;
+//   float: left;
+//   left: 0;
+//   right: 0;
+//   z-index: 1;
+//   overflow: hidden;
+//   background-color: #fff;
+//   animation: childsActive 0.5s;
+//   border-top: 1px solid #dadcda;
+// }
+.cont-childs {
+  display: flex;
   justify-content: center;
-  width: 100%;
   height: 50px;
   line-height: 50px;
-  background-color: #fff;
-  border-top: 1px solid #dadcda;
-  .cont-child {
-    position: relative;
-    display: flex;
-    float: left;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 18px;
-  }
 }
-.cont-child:hover::before {
-  width: 50%;
+.cont-child {
+  position: relative;
+  list-style-type: none;
+  float: left;
+  padding-left: 31px;
+  padding-right: 30px;
+  font-size: 18px;
+  color: #fff;
 }
 .nav-contact p {
   padding-right: 10px;
+}
+a {
+  color: inherit;
+}
+@keyframes childsActive {
+  from {
+    height: 0;
+  }
+  to {
+    height: 50px;
+  }
+}
+@keyframes childsLeave {
+  from {
+    height: 50px;
+  }
+  to {
+    height: 0;
+  }
 }
 </style>
