@@ -1,10 +1,10 @@
 <template>
-  <div class="Login"></div>
+  <div id="product_detail"></div>
 </template>
 
 <script>
 export default {
-  name: "Login",
+  name: "ProductDetail",
 };
 </script>
 <style lang="scss" scoped>
