@@ -5,9 +5,9 @@
       <img src="~/assets/img/compBaseImg/logo-active.png" v-else />
     </div>
     <div class="nav-contents clear-fix">
-      <div class="nav-content clear-fix" v-for="(item,index) in navBarContent" :key="index" @mouseenter="contentClick(index)" @mouseleave="contentLeave">
+      <div class="nav-content clear-fix" v-for="(item,index) in navBarContent" :key="index" @mouseenter="contentClick(index)" @mouseleave="contentLeave()">
         <a href="">{{item.title}}</a>
-        <div class="child-nav clear-fix" v-if="item.childs.length > 0" :key="index" :style="{display:index===childId?'block':'none'}">
+        <div id="childNav" class="child-nav clear-fix" v-if="item.childs.length > 0" :key="index" :style="{display:index===childId?'block':'none'}">
           <ul class="cont-childs  clear-fix">
             <li class="cont-child" v-for="child in item.childs" :key="child.id"><a href="">{{child}}</a></li>
           </ul>
@@ -71,9 +71,17 @@ export default {
     contentClick(index) {
       this.childId = index;
       this.navContentShowActive = false;
+      // let childLable = $event.currentTarget.querySelector("#childNav");
+      // if (childLable) {
+      //   childLable.className = "child-nav-active child-nav clear-fix";
+      // }
     },
     contentLeave() {
       this.childId = 0;
+      // let childLable = $event.currentTarget.querySelector("#childNav");
+      // if (childLable) {
+      //   childLable.className = "child-nav-leave child-nav clear-fix";
+      // }
     },
     handleScroll() {
       this.topDistance =
@@ -97,6 +105,7 @@ export default {
   width: 100%;
   color: #fff;
   font-size: 20px;
+  z-index: 999;
   transition: all 0.5s;
 }
 .nav-logo,
@@ -171,17 +180,11 @@ export default {
   animation: childsActive 0.5s;
   border-top: 1px solid #dadcda;
 }
+// .child-nav-leave {
+//   animation: childsLeave 0.5s;
+// }
 // .child-nav-active {
-//   position: fixed;
-//   display: none;
-//   float: left;
-//   left: 0;
-//   right: 0;
-//   z-index: 1;
-//   overflow: hidden;
-//   background-color: #fff;
 //   animation: childsActive 0.5s;
-//   border-top: 1px solid #dadcda;
 // }
 .cont-childs {
   display: flex;
