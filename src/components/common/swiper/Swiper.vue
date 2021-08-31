@@ -3,8 +3,9 @@
     <div class="swiper-banners" @mouseenter="bannerMouseClick" @mouseleave="bannerMouseLeave" @mousedown="bannerMouseDown">
       <slot></slot>
     </div>
+    <slot name="text"></slot>
     <div class="indicator" v-if="showIndicator && bannerCount > 1">
-      <div class="indi-item" v-for="(item, index) in bannerCount" :class="{active: index === currentIndex - 1 }" :key="index" @click="indicatorClick"></div>
+      <div class="indi-item" v-for="(item, index) in bannerCount" :class="{active: index === currentIndex - 1 || index === currentIndex - bannerCount - 1}" :key="index" @click="indicatorClick(index)"></div>
     </div>
   </div>
 </template>
@@ -15,21 +16,16 @@ export default {
   /**
    * interval 轮播间隔/ms
    * duration 轮播速度/ms
-   * moveRatio 拖动比率/0~1
    * showIndicator 是否显示下方播放图标
    */
   props: {
     interval: {
       type: Number,
-      default: 3000,
+      default: 4500,
     },
     duration: {
       type: Number,
-      default: 300,
-    },
-    moveRatio: {
-      type: Number,
-      default: 0.25,
+      default: 1000,
     },
     showIndicator: {
       type: Boolean,
@@ -37,36 +33,42 @@ export default {
     },
   },
   /**
-   * bannerCount banner图组件的数量
+   * bannerCount banner图数量
    * totalWidth 组件显示宽度(不包含隐藏部分)
-   * swiperStyle 当前显示图片的样式
+   * totalHeight 浏览器可视窗口的高度
+   * swiperStyle 组件样式
    * currentIndex 显示图片的编号，默认显示第一张
    * scrolling 滚动开关
+   * onResize 窗口是否变动/刷新
    */
   data: function () {
     return {
       bannerCount: 0,
       totalWidth: 0,
+      totalHeight: 0,
       swiperStyle: {},
       currentIndex: 1,
       scrolling: false,
+      onResize: false,
     };
   },
   mounted() {
     setTimeout(() => {
       this.handleDom();
       this.startTimer();
-    }, 500);
-    this.listenerResize();
+      this.listenerResize();
+    }, 50);
   },
   watch: {
     totalWidth(val) {
       this.totalWidth = val;
-      this.scrollContent(-this.currentIndex * this.totalWidth);
+      setTimeout(() => {
+        this.scrollContent(-this.currentIndex * this.totalWidth);
+        this.onResize = false;
+      }, 50);
     },
   },
   /**
-   * updateTotalWidth() 获取组件宽度
    * listenerResize() 监听浏览器窗口变化，实时获取组件宽度
    * startTimer() 定时器 -> 开始滚动
    * stopTimer() 定时器 -> 停止滚动
@@ -80,14 +82,11 @@ export default {
    * indicatorClick() 点击标识
    */
   methods: {
-    updateTotalWidth() {
-      this.totalWidth = document.querySelector(".swiper-banners").offsetWidth;
-      console.log("------------");
-    },
     listenerResize() {
       let that = this;
       window.onresize = function () {
-        that.updateTotalWidth();
+        that.totalWidth = document.querySelector(".swiper-banners").offsetWidth;
+        that.onResize = true;
       };
     },
     startTimer() {
@@ -115,7 +114,13 @@ export default {
     },
     scrollContent(position) {
       this.scrolling = true;
-      this.swiperStyle.transition = "transform" + this.duration + "ms";
+      if (this.onResize) {
+        this.swiperStyle.transition = "0ms";
+      } else if (!this.onResize) {
+        this.swiperStyle.transitionDuration = this.duration + "ms";
+        this.swiperStyle.transitionTimingFunction =
+          "cubic-bezier(0.46, 0.33, 0.26, 0.88)";
+      }
       this.setTransform(position);
       this.checkPosition();
       this.scrolling = false;
@@ -130,9 +135,6 @@ export default {
         this.swiperStyle.transition = "0ms";
         if (this.currentIndex >= this.bannerCount + 1) {
           this.currentIndex = 1;
-          this.setTransform(-this.currentIndex * this.totalWidth);
-        } else if (this.currentIndex <= 0) {
-          this.currentIndex = this.bannerCount;
           this.setTransform(-this.currentIndex * this.totalWidth);
         }
       }, this.duration);
@@ -150,10 +152,11 @@ export default {
       this.stopTimer();
       this.startX = e.touches[0].pageX;
     },
-    indicatorClick() {
-      // this.currentIndex = index - 1;
-      // let that = this;
-      // debounce(that.scrollContent(-index * this.totalWidth), 500);
+    indicatorClick(index) {
+      this.stopTimer();
+      this.currentIndex = index + 1;
+      this.scrollContent(-this.currentIndex * this.totalWidth);
+      this.startTimer();
     },
   },
 };

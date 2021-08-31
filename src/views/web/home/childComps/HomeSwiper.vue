@@ -1,8 +1,8 @@
 <template>
-  <div class="home-swiper">
+  <div id="home-swiper">
     <swiper>
       <swiper-item v-for="(banner, index) in banners" :key="index">
-        <a href=""><img :src="banner.imgSrc" /></a>
+        <a href="" slot="img"><img :src="banner.imgSrc" /></a>
       </swiper-item>
     </swiper>
   </div>
@@ -25,7 +25,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.home-swiper {
+#home-swiper {
   width: 100%;
+  height: auto;
 }
 </style>

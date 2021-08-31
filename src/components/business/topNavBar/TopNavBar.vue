@@ -1,5 +1,5 @@
 <template>
-  <div class="topNavBar clear-fix" @mouseenter="navBarClick" @mouseleave="navBarLeave" :class="{navBarShowActive:!navBarActive}">
+  <div class="topNavBar clear-fix fn20" @mouseenter="navBarClick" @mouseleave="navBarLeave" :class="{navBarShowActive:!navBarActive}">
     <div class="nav-logo">
       <img src="~/assets/img/compBaseImg/logo.png" v-if="navBarActive" />
       <img src="~/assets/img/compBaseImg/logo-active.png" v-else />
@@ -9,7 +9,7 @@
         <a href="">{{item.title}}</a>
         <div id="childNav" class="child-nav clear-fix" v-if="item.childs.length > 0" :key="index" :style="{display:index===childId?'block':'none'}">
           <ul class="cont-childs  clear-fix">
-            <li class="cont-child" v-for="child in item.childs" :key="child.id"><a href="">{{child}}</a></li>
+            <li class="cont-child" v-for="child in item.childs" :key="child.id"><a href="" class="fn16">{{child}}</a></li>
           </ul>
         </div>
       </div>
@@ -104,7 +104,6 @@ export default {
   height: 70px;
   width: 100%;
   color: #fff;
-  font-size: 20px;
   z-index: 999;
   transition: all 0.5s;
 }
@@ -198,7 +197,6 @@ export default {
   float: left;
   padding-left: 31px;
   padding-right: 30px;
-  font-size: 18px;
   color: #fff;
 }
 .nav-contact p {

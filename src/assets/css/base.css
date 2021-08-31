@@ -24,6 +24,7 @@ body {
   -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
   background: var(--color-background);
   color: var(--color-text);
+  /* max-width: 1920px; */
   /* rem vw/vh */
   width: 100%;
 }
@@ -52,4 +53,39 @@ a {
 
 .right {
   float: right;
+}
+.fn36{
+  font-size: 36px;
+}
+.fn30{
+  font-size: 30px;
+}
+.fn24{
+  font-size: 24px;
+}
+
+.fn20{
+  font-size: 20px;
+}
+
+.fn18{
+  font-size: 18px;
+}
+
+.fn16{
+  font-size: 16px;
+}
+
+.fn15{
+  font-size: 15px;
+}
+.fn14{
+  font-size: 14px;
+}
+img{
+  vertical-align: middle;
+}
+.content-center{
+  width: 70%;
+  margin:0px auto;
 }
