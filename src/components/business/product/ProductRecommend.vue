@@ -1,5 +1,7 @@
 <template>
-  <div class="product-recommend"></div>
+  <div class="product-recommend">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

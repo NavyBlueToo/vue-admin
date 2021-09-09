@@ -9,12 +9,15 @@
           <img :src="productItemDetail.brandImg" alt="" />
         </div>
         <div class="product-information">
-          <h4>{{productItemDetail.title}}</h4>
-          <p>{{productItemDetail.standard}}</p>
+          <h4 class="hidden-line">{{productItemDetail.title}}</h4>
+          <p class="hidden-line">{{productItemDetail.standard}}</p>
         </div>
       </div>
       <div class="hot-icon" v-show="productItemDetail.hotState==1?true:false">
         <span class="iconfont icon-remen" title="热度产品" />
+      </div>
+      <div class="capacity">
+        <span class="iconfont icon-shiyoutong" title="包装大小">{{productItemDetail.capacity}}</span>
       </div>
     </a>
   </div>
@@ -61,12 +64,7 @@ export default {
 }
 p,
 h4 {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #666;
+  color: var(--color-text);
 }
 .product-img {
   overflow: hidden;
@@ -86,7 +84,6 @@ h4 {
   -ms-transform: scale(1.05);
 }
 h4 {
-  display: block;
   font-size: 15px;
   margin-bottom: 5px;
   transition: all 0.36s ease-in-out;
@@ -109,5 +106,14 @@ a {
 }
 .hot-icon .icon-remen {
   font-size: 20px;
+}
+.capacity {
+  position: absolute;
+  top: 58%;
+  left: 8%;
+  color: #999;
+}
+.capacity span {
+  font-size: 10px;
 }
 </style>

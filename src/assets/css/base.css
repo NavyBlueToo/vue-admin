@@ -31,9 +31,12 @@ body {
 
 a {
   text-decoration: none;
+  color: #333;
 }
-
-
+a:hover{
+  cursor:pointer ;
+  color: #333;
+}
 .clear-fix::after {
   clear: both;
   content: '';
@@ -82,10 +85,32 @@ a {
 .fn14{
   font-size: 14px;
 }
+.fn12{
+  font-size: 12px;
+}
 img{
   vertical-align: middle;
 }
 .content-center{
   width: 70%;
   margin:0px auto;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.hot{
+  color:#FF0000
+}
+.fw{
+  font-weight: 700;
+}
+.hidden-line{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

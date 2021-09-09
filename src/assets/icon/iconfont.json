@@ -6,6 +6,34 @@
   "description": "河南航材官网",
   "glyphs": [
     {
+      "icon_id": "18175743",
+      "name": "圆形",
+      "font_class": "radio-off-full",
+      "unicode": "ea6b",
+      "unicode_decimal": 60011
+    },
+    {
+      "icon_id": "15192646",
+      "name": "查看",
+      "font_class": "chakan",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "19544378",
+      "name": "关注用户管理",
+      "font_class": "guanzhuyonghuguanli",
+      "unicode": "e732",
+      "unicode_decimal": 59186
+    },
+    {
+      "icon_id": "16429202",
+      "name": "石油桶",
+      "font_class": "shiyoutong",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    },
+    {
       "icon_id": "1294838",
       "name": "热门",
       "font_class": "remen",

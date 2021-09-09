@@ -5,7 +5,7 @@
         <img :src="productTypeList.indexTopImg" alt="" title="" />
       </div>
       <div class="product-content">
-        <div class="product-detail">
+        <div class="product-detail clear-fix">
           <product-list class="product-list">
             <div class="product-type-title">
               <h2>{{productTypeList.productType}}</h2>
@@ -18,7 +18,27 @@
             </div>
             <product-item class="product-item" v-for="(productItem,productIndex) in productTypeList.productList" :key="productIndex" :productItemDetail="productItem"></product-item>
           </product-list>
-          <product-recommend class="product-recommend">
+          <product-recommend class="product-recommend picture-recommend clear-fix" v-if="typeIndex==0">
+            <span class="consider fn14">主力产品推荐</span>
+            <a href="">更多<i class="el-icon-arrow-right"></i></a>
+            <small-swiper :swiperData="pictureRecommend" class="picture-swiper" :indicatorNum="pictureRecommend.length" @swiperImgLoad='swiperImgLoad' :interval="3000">
+            </small-swiper>
+          </product-recommend>
+          <product-recommend class="product-recommend clear-fix" v-if="typeIndex==1">
+            <tabbar :tabbarData="articleList" class="type-article clear-fix" ref="tabbar" @setTabbarIndex="getTabbarIndex">
+              <a href="">更多<i class="el-icon-arrow-right"></i></a>
+            </tabbar>
+            <div class="article-ranking">
+              <div class="article-items">
+                <universal-article-ranking class="article-item" v-for="(articleData ,articleListIndex) in articleList" :key="articleListIndex" :articleData="articleData" :style="{transform:translateNo}" />
+              </div>
+            </div>
+          </product-recommend>
+          <product-recommend class="product-recommend picture-recommend clear-fix" v-if="typeIndex==2">
+            <span class="consider fn14">主力产品推荐</span>
+            <a href="">更多<i class="el-icon-arrow-right"></i></a>
+            <small-swiper :swiperData="pictureRecommend" class="picture-swiper" :indicatorNum="pictureRecommend.length" @swiperImgLoad='swiperImgLoad' :interval="3000">
+            </small-swiper>
           </product-recommend>
         </div>
       </div>
@@ -30,15 +50,45 @@
 import ProductList from "components/business/product/ProductList";
 import ProductItem from "components/business/product/ProductItem";
 import ProductRecommend from "components/business/product/ProductRecommend";
+
+import SmallSwiper from "components/common/swiper/SmallSwiper";
+
+import { tabbarClickMixin } from "common/mixin/mixin";
+
 export default {
-  components: { ProductList, ProductItem, ProductRecommend },
+  components: {
+    ProductList,
+    ProductItem,
+    ProductRecommend,
+    SmallSwiper,
+  },
   name: "HomeProductList",
+  mixins: [tabbarClickMixin],
   props: {
     productList: {
       type: Array,
       default() {
         return [];
       },
+    },
+    consider: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    pictureRecommend: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+  methods: {
+    swiperImgLoad() {
+      document.querySelector(".picture-swiper").style.height =
+        document.querySelector(".small-swiper .swiper-item img").offsetHeight +
+        "px";
     },
   },
 };
@@ -119,6 +169,7 @@ h2 {
 .product-list {
   width: 70%;
   display: flex;
+  float: left;
   flex-wrap: wrap;
 }
 .product-recommend {
@@ -131,5 +182,45 @@ h2 {
   margin-top: 10px;
   min-width: 160px;
   margin-right: 2%;
+}
+.consider {
+  padding-top: 5px;
+  border-bottom: 2px solid #001eb4;
+  color: #001eb4;
+  font-weight: 700;
+  line-height: 1.8;
+}
+.type-article {
+  width: 100%;
+  height: 27px;
+  line-height: 27px;
+}
+.product-recommend a,
+.type-article a {
+  display: block;
+  float: right;
+}
+.product-recommend a {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.article-ranking {
+  overflow: hidden;
+  width: 100%;
+}
+.article-items {
+  display: flex;
+  float: right;
+}
+.article-items ::v-deep ul {
+  flex: 1;
+  transition: transform 0.2s ease-in-out;
+}
+.picture-recommend {
+  position: relative;
+  overflow: hidden;
+}
+.picture-swiper {
+  margin-top: 10px;
 }
 </style>
