@@ -6,7 +6,7 @@
     <home-products :foldSwipers="foldSwipers" />
     <home-product-list :productList="productList" :articleList="hkyyyArticle" :consider="consider" :pictureRecommend="pictureRecommend" />
     <grease-product :greaseProducts="GreaseProducts" :articleList="hkyyyArticle" />
-    <space-product :spaceProducts="SpaceProducts" :articleList="hkyyyArticle" />
+    <space-product :spaceProducts="SpaceProducts" :articleList="hkyyyArticle" :adhibitionsData="Adhibitions" />
   </div>
 </template>
 
@@ -727,6 +727,8 @@ export default {
         productTypeLink: "",
         indexTopImg: "img/productImg/typeIndexImg/hkyyy.jpg",
         productContent: 66,
+        tabbarType: "热门应用",
+        tabbarLink: "",
         productList: [
           {
             title: "7804抗化学介质润滑脂",
@@ -802,6 +804,29 @@ export default {
           },
         ],
       },
+      Adhibitions: [
+        { title: "运载火箭", link: "", iconSrc: "icon-shenzhouwuhaohuojian" },
+        {
+          title: "人造卫星",
+          link: "",
+          iconSrc: "icon-zhongbadiqiuziyuanweixing",
+        },
+        {
+          title: "宇宙飞船",
+          link: "",
+          iconSrc: "icon-shenzhouliuhaofeichuan",
+        },
+        { title: "履带车辆", link: "", iconSrc: "icon-tanke" },
+        { title: "口径火炮", link: "", iconSrc: "icon-huopao" },
+        { title: "轻型武器", link: "", iconSrc: "icon-buqiang" },
+        { title: "各类舰船", link: "", iconSrc: "icon-hangmu" },
+        {
+          title: "真空设备",
+          link: "",
+          iconSrc: "icon-donglizhaoming_shuibeng",
+        },
+        { title: "铁路车辆", link: "", iconSrc: "icon-gaotie" },
+      ],
     };
   },
 };

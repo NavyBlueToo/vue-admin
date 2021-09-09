@@ -112,4 +112,7 @@ export default {
   flex: 1;
   transition: transform 0.2s ease-in-out;
 }
+.type-article {
+  margin-top: 5px;
+}
 </style>

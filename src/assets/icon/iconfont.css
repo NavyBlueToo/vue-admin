@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2773277 */
-  src: url('iconfont.woff2?t=1630505436266') format('woff2'),
-       url('iconfont.woff?t=1630505436266') format('woff'),
-       url('iconfont.ttf?t=1630505436266') format('truetype');
+  src: url('iconfont.woff2?t=1631170427759') format('woff2'),
+       url('iconfont.woff?t=1631170427759') format('woff'),
+       url('iconfont.ttf?t=1631170427759') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tanke:before {
+  content: "\e667";
+}
+
+.icon-huopao:before {
+  content: "\e668";
+}
+
+.icon-donglizhaoming_shuibeng:before {
+  content: "\e61f";
+}
+
+.icon-hangmu:before {
+  content: "\e62d";
+}
+
+.icon-gaotie:before {
+  content: "\e677";
+}
+
+.icon-buqiang:before {
+  content: "\e63c";
+}
+
+.icon-shenzhouliuhaofeichuan:before {
+  content: "\e616";
+}
+
+.icon-shenzhouwuhaohuojian:before {
+  content: "\e617";
+}
+
+.icon-zhongbadiqiuziyuanweixing:before {
+  content: "\e619";
 }
 
 .icon-radio-off-full:before {

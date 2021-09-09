@@ -1,6 +1,9 @@
 import UniversalArticleRanking from "components/common/universalArticleRanking/UniversalArticleRanking";
 import Tabbar from "components/common/universalTabbar/Tabbar";
 
+import SingleBar from "components/business/util/singleBar";
+import SingleMoreButton from "components/business/util/singleMoreButton";
+
 /**
  * 右侧新闻/排行展示模块通用组件
  */
@@ -42,5 +45,16 @@ export const tabbarClickMixin = {
     calculateTransform(index) {
       this.translateNo = "translateX(" + (this.tabbarNum - index) + "00%)";
     },
+  }
+}
+
+
+/**
+ * 单个bar 
+ */
+export const singleBar = {
+  components: {
+    SingleBar,
+    SingleMoreButton
   }
 }
