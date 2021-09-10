@@ -1,5 +1,6 @@
 import UniversalArticleRanking from "components/common/universalArticleRanking/UniversalArticleRanking";
 import Tabbar from "components/common/universalTabbar/Tabbar";
+import SmallSwiper from "components/common/swiper/SmallSwiper";
 
 import SingleBar from "components/business/util/singleBar";
 import SingleMoreButton from "components/business/util/singleMoreButton";
@@ -48,6 +49,29 @@ export const tabbarClickMixin = {
   }
 }
 
+/**
+ * 右侧小swiper通用组件
+ */
+export const smallSwiperMixin = {
+  components: {
+    SmallSwiper,
+  },
+  props: {
+    pictureRecommend: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+  methods: {
+    swiperImgLoad() {
+      document.querySelector(".picture-swiper").style.height =
+        document.querySelector(".small-swiper .swiper-item img").offsetHeight +
+        "px";
+    },
+  },
+}
 
 /**
  * 单个bar 

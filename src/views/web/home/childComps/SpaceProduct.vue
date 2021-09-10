@@ -75,9 +75,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.grease-product {
+.space-product {
   color: var(--color-text);
 }
+/*
+ * 产品类型详情大盒子
+ */
 .product-detail {
   margin-top: 20px;
   width: 100%;
@@ -111,9 +114,15 @@ export default {
   min-width: 160px;
   margin-right: 2%;
 }
+/*
+ * 单个选项卡样式
+ */
 .single-bar {
   margin-top: 5px;
 }
+/*
+ * 九宫格应用场景样式
+ */
 .adhibition {
   width: 28%;
   height: 90%;
