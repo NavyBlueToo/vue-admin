@@ -114,48 +114,4 @@ export default {
   min-width: 160px;
   margin-right: 2%;
 }
-/*
- * 单个选项卡样式
- */
-.single-bar {
-  margin-top: 5px;
-}
-/*
- * 九宫格应用场景样式
- */
-.adhibition {
-  width: 28%;
-  height: 90%;
-  margin-left: 2%;
-  margin-top: 10px;
-  text-align: center;
-  background-color: #fff;
-}
-.adhibition span {
-  display: block;
-  font-size: 50px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  transition: transform 0.36s ease-in-out;
-}
-.adhibition p {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: var(--color-text);
-}
-.icon-hangmu:before {
-  font-size: 35px;
-}
-.icon-gaotie:before {
-  font-size: 30px;
-}
-.adhibition-item:hover {
-  color: #001eb4;
-}
-.adhibition-item:hover span {
-  transform: translateY(5%);
-}
-.adhibition-item:hover p {
-  color: #001eb4;
-}
 </style>

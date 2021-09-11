@@ -27,4 +27,7 @@ export default {
 .type-title {
   margin-top: 50px;
 }
+img {
+  width: 100%;
+}
 </style>

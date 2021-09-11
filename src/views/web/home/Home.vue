@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import "assets/css/index-product.css";
 import topNavBar from "components/business/topNavBar/TopNavBar";
 
 import HomeSwiper from "./childComps/HomeSwiper";

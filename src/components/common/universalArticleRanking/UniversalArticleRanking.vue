@@ -31,11 +31,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .universal-article-ranking {
+  width: 100%;
   margin-top: 10px;
 }
 a {
   display: block;
   width: 100%;
+}
+ul {
+  transition: transform 0.2s ease-in-out;
 }
 li:nth-child(-n + 3) > a .article-no {
   color: #f3f4f5;
